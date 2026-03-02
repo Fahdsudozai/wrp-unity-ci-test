@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+*.csproj
+*.unityproj
+*.sln
+
+# Unity folders
+Library/
+Temp/
+Obj/
+Build/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+Logs/
+UserSettings/
+
+# Build files
+*.apk
+*.aab
+
