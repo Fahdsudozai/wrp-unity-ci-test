@@ -101,13 +101,13 @@ jobs:
         id: status
         run: |
           if [ "${{ needs.build-android.result }}" == "success" ]; then
-            echo "icon=✅" >> $GITHUB_OUTPUT
+            echo "icon=SUCCESS" >> $GITHUB_OUTPUT
             echo "color=#36a64f" >> $GITHUB_OUTPUT
-            echo "text=SUCCESS" >> $GITHUB_OUTPUT
+            echo "text=Build Passed" >> $GITHUB_OUTPUT
           else
-            echo "icon=❌" >> $GITHUB_OUTPUT
+            echo "icon=FAILED" >> $GITHUB_OUTPUT
             echo "color=#ff0000" >> $GITHUB_OUTPUT
-            echo "text=FAILED" >> $GITHUB_OUTPUT
+            echo "text=Build Failed" >> $GITHUB_OUTPUT
           fi
 
       - name: Send Slack Notification
@@ -122,7 +122,7 @@ jobs:
                     "type": "header",
                     "text": {
                       "type": "plain_text",
-                      "text": "${{ steps.status.outputs.icon }} Unity Android Build — ${{ steps.status.outputs.text }}"
+                      "text": "${{ steps.status.outputs.icon }} Unity Android Build - ${{ steps.status.outputs.text }}"
                     }
                   },
                   {
