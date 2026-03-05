@@ -48,4 +48,3 @@ jobs:
           path: ${{ env.BUILD_DIR }}/**/*.apk
           retention-days: 7
           if-no-files-found: error
-```
