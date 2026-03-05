@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      - develop
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 env:
@@ -27,24 +31,41 @@ jobs:
             Library-Android-
             Library-
 
+      - name: Setup Android Keystore
+        run: |
+          mkdir -p ${{ env.BUILD_DIR }}
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > ${{ env.BUILD_DIR }}/keystore.jks
+
       - name: Build APK
         uses: game-ci/unity-builder@v4
         env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: ${{ env.UNITY_VERSION }}
           targetPlatform: Android
-          buildsPath: ${{ env.BUILD_DIR }}
+          buildsPath: ${{ env.BUILD_DIR }}/apk
           buildName: WRP-Demo
           androidExportType: androidPackage
+          androidKeystoreName: ${{ env.BUILD_DIR }}/keystore.jks
+          androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+          androidKeyaliasName: ${{ secrets.ANDROID_KEY_ALIAS }}
+          androidKeyaliasPass: ${{ secrets.ANDROID_KEY_ALIAS_PASS }}
           customParameters: -nographics
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - name: Build AAB
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          name: Android-APK-${{ github.sha }}
-          path: ${{ env.BUILD_DIR }}/**/*.apk
-          retention-days: 7
-          if-no-files-found: error
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildsPath: ${{ env.BUILD_DIR }}/aab
+          buildName: WRP-Demo
+          androidExportType: androidAppBundle
+          androidKeystoreName: ${{ env.BUILD_DIR }}/keystore.jks
+          androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+          android
