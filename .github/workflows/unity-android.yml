@@ -127,14 +127,12 @@ jobs:
                       "text": "${{ steps.status.outputs.icon }} Unity Android Build - ${{ steps.status.outputs.text }}"
                     }
                   },
-                  {
+                 {
                     "type": "section",
-                    "fields": [
-                      { "type": "mrkdwn", "text": "*Repository:*\\n`${{ github.repository }}`" },
-                      { "type": "mrkdwn", "text": "*Branch:*\\n`${{ github.ref_name }}`" },
-                      { "type": "mrkdwn", "text": "*Commit:*\\n`${{ github.sha }}`" },
-                      { "type": "mrkdwn", "text": "*Triggered by:*\\n`${{ github.actor }}`" }
-                    ]
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Repository:* `${{ github.repository }}`\\n*Branch:* `${{ github.ref_name }}`\\n*Commit:* `${{ github.sha }}`\\n*Triggered by:* `${{ github.actor }}`"
+                    }
                   },
                   {
                     "type": "section",
