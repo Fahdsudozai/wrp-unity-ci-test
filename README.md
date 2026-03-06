@@ -7,8 +7,17 @@ This pipeline automatically builds **APK** (for direct install) and **AAB** (for
 # Pipeline Architecture
 
 ![Pipeline Architecture](pipeline-diagram.png)
-# Pipeline Architecture
+---
 
+# Successful Pipeline Run
+
+### GitHub Actions
+![Pipeline Success](pipeline-success.png)
+
+### Slack Notification
+![Slack Notification](slack-success.png)
+
+---
 ```
 Code Push / Manual Trigger
         ↓
