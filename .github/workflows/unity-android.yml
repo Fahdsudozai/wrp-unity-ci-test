@@ -131,7 +131,7 @@ jobs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-"text": "*Repository:* `${{ github.repository }}`  |  *Branch:* `${{ github.ref_name }}`  |  *Commit:* `${{ github.sha }}`  |  *Triggered by:* `${{ github.actor }}`"                    }
+                      "text": "*Repository:* `${{ github.repository }}`  |  *Branch:* `${{ github.ref_name }}`  |  *Commit:* `${{ github.sha }}`  |  *Triggered by:* `${{ github.actor }}`"                    }
                   },
                   {
                     "type": "section",
